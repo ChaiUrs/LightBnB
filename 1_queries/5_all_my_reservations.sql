@@ -1,5 +1,5 @@
 
-SELECT properties.id AS id, title, cost_per_night, start_date, avg(property_reviews.rating)
+SELECT properties.id AS id, title, cost_per_night, start_date, avg(property_reviews.rating) AS average_rating
 FROM properties
 JOIN reservations ON properties.id = reservations.property_id
 JOIN property_reviews ON properties.id = property_reviews.property_id
