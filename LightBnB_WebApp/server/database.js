@@ -33,6 +33,9 @@ const getUserWithEmail = function(email) {
     } else {
       return null;
     }
+  })
+  .catch(error => {
+    console.log(error);
   });
 }
 exports.getUserWithEmail = getUserWithEmail;
@@ -91,9 +94,20 @@ exports.addUser = addUser;
  * @return {Promise<[{}]>} A promise to the reservations.
  */
 const getAllReservations = function(guest_id, limit = 10) {
-  return getAllProperties(null, 2);
+  const getAllReservationsQuery = `
+  SELECT * FROM reservations JOIN users ON users.id = guest_id JOIN properties ON property_id = properties.id
+  WHERE users.id = $1
+  LIMIT $2;
+  `
+  return pool.query(getAllReservationsQuery, [guest_id, limit])
+  .then(res => {
+    return res.rows;
+  })
+  .catch(error => console.log(error));
 }
 exports.getAllReservations = getAllReservations;
+
+
 
 /// Properties
 
