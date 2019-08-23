@@ -1,6 +1,8 @@
 
-// const properties = require('./json/properties.json');
-// const users = require('./json/users.json');
+const properties = require('./json/properties.json');
+const users = require('./json/users.json');
+const db = require('./db.js');
+
 // const { Pool } = require('pg');
 
 // const pool = new Pool ({
@@ -12,7 +14,6 @@
 
 // pool.connect();
 
-const db = require('./db');
 
 /// Users
 
