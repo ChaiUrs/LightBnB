@@ -175,10 +175,9 @@ const getAllProperties = function(options, limit = 10) {
   `;
 
   if (options.minimum_rating) {
-    queryParmas.push(` ${options.minimum_rating}`);
+    queryParmas.push(`${options.minimum_rating}`);
     queryString += ` HAVING avg(property_reviews.rating) > $${queryParams.length} `;
   }
-
   queryParams.push(limit);
   queryString += `
   ORDER BY cost_per_night
@@ -197,9 +196,11 @@ exports.getAllProperties = getAllProperties;
  * @return {Promise<{}>} A promise to the property.
  */
 const addProperty = function(property) {
-  const { owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms } = property;
+  const { owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, 
+    city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms } = property;
   const queryString = `
-  INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms)
+  INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, 
+    city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
   RETURNING *;
   `;
